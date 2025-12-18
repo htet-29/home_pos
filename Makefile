@@ -21,3 +21,6 @@ upgrade-go:
 
 build:
 	go build -o pos ./cmd/web/
+
+run:
+	go run ./cmd/web/

@@ -18,10 +18,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("GET /home/view", homeView)
-	mux.HandleFunc("GET /home/create", homeCreate)
-	mux.HandleFunc("POST /home/create", homeCreatePost)
+	mux.HandleFunc("GET /{$}", home)
+	// mux.HandleFunc("GET /home/view", homeView)
+	// mux.HandleFunc("GET /home/create", homeCreate)
+	// mux.HandleFunc("POST /home/create", homeCreatePost)
 
 	logger.Info("starting servers", slog.String("addr", *addr))
 
