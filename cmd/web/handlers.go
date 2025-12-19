@@ -1,43 +1,22 @@
 package main
 
 import (
-	"html/template"
-	"log"
 	"net/http"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Server", "Go")
-
-	files := []string{
-		"./ui/html/base.gohtml",
-		"./ui/html/pages/home.gohtml",
-		"./ui/html/partials/nav.gohtml",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		log.Print(err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	err = ts.ExecuteTemplate(w, "base", nil)
-	if err != nil {
-		log.Print(err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-	}
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
+	app.render(w, r, http.StatusOK, "home.gohtml", templateData{})
 }
 
-func homeView(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("This is a home view."))
+func (app *application) stocksView(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("This is a stock view."))
 }
 
-func homeCreate(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("This is a home create."))
+func (app *application) stockCreate(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("This is a stock create."))
 }
 
-func homeCreatePost(w http.ResponseWriter, r *http.Request) {
+func (app *application) stockCreatePost(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte("Save a home data..."))
+	w.Write([]byte("Save a stock data..."))
 }

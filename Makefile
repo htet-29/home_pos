@@ -24,3 +24,6 @@ build:
 
 run:
 	go run ./cmd/web/
+	
+test:
+	go test ./... -coverprofile=coverage.out

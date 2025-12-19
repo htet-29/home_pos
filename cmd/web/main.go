@@ -2,30 +2,37 @@ package main
 
 import (
 	"flag"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
 )
 
+type application struct {
+	logger        *slog.Logger
+	templateCache map[string]*template.Template
+}
+
 func main() {
 	addr := flag.String("addr", "localhost:4000", "HTTP network address")
 	flag.Parse()
 
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level:     slog.LevelDebug,
-		AddSource: true,
-	}))
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{AddSource: true}))
 
-	mux := http.NewServeMux()
+	templateCache, err := newTemplateCache()
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
 
-	mux.HandleFunc("GET /{$}", home)
-	// mux.HandleFunc("GET /home/view", homeView)
-	// mux.HandleFunc("GET /home/create", homeCreate)
-	// mux.HandleFunc("POST /home/create", homeCreatePost)
+	app := &application{
+		logger:        logger,
+		templateCache: templateCache,
+	}
 
 	logger.Info("starting servers", slog.String("addr", *addr))
 
-	err := http.ListenAndServe(*addr, mux)
+	err = http.ListenAndServe(*addr, app.routes())
 	logger.Error(err.Error())
 	os.Exit(1)
 }
