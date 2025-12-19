@@ -20,7 +20,7 @@ upgrade-go:
 	rm go$(GO_VERSION).linux-amd64.tar.gz
 
 build:
-	go build -o pos ./cmd/web/
+	go build -o ./build/pos ./cmd/web/ 
 
 run:
 	go run ./cmd/web/

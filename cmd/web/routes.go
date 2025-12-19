@@ -1,14 +1,18 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
 
-func (app *application) routes() *http.ServeMux {
+	"github.com/htet-29/home-pos/internal/handlers"
+)
+
+func routes(h *handlers.Handler) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /{$}", app.home)
-	mux.HandleFunc("GET /pos/stock", app.stocksView)
-	mux.HandleFunc("GET /pos/stock/create", app.stockCreate)
-	mux.HandleFunc("POST /pos/stock/create", app.stockCreatePost)
+	mux.HandleFunc("GET /{$}", h.Home)
+	mux.HandleFunc("GET /pos/stock", h.StocksView)
+	mux.HandleFunc("GET /pos/stock/create", h.StockCreate)
+	mux.HandleFunc("POST /pos/stock/create", h.StockCreatePost)
 
 	return mux
 }

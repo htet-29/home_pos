@@ -2,16 +2,13 @@ package main
 
 import (
 	"flag"
-	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
-)
 
-type application struct {
-	logger        *slog.Logger
-	templateCache map[string]*template.Template
-}
+	"github.com/htet-29/home-pos/internal/config"
+	"github.com/htet-29/home-pos/internal/handlers"
+)
 
 func main() {
 	addr := flag.String("addr", "localhost:4000", "HTTP network address")
@@ -19,20 +16,16 @@ func main() {
 
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{AddSource: true}))
 
-	templateCache, err := newTemplateCache()
-	if err != nil {
-		logger.Error(err.Error())
-		os.Exit(1)
+	app := &config.AppConfig{
+		Addr:   *addr,
+		Logger: logger,
 	}
 
-	app := &application{
-		logger:        logger,
-		templateCache: templateCache,
-	}
+	app.Logger.Info("starting servers", slog.String("addr", *addr))
 
-	logger.Info("starting servers", slog.String("addr", *addr))
+	h := handlers.NewHandler(app)
 
-	err = http.ListenAndServe(*addr, app.routes())
-	logger.Error(err.Error())
+	err := http.ListenAndServe(*addr, routes(h))
+	app.Logger.Error(err.Error())
 	os.Exit(1)
 }
