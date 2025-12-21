@@ -1,0 +1,124 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-primary: #F1F3F6;
+    --bg-secondary: #F7F9FA;
+    --text-primary: #34495E;
+    --text-secondary: #62CB31;
+    --text-hover: #4EB722;
+    --text-muted: #64748b;
+    --border: #E4E5E7;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-size: 18px; */
+    font-family: "Ubuntu Mono", monospace; 
+}
+
+html {
+    height: 100%;
+    font-size: 10px;
+}
+
+body {
+    height: 100%;
+    line-height: 1.5;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-y: scroll;
+}
+
+header, nav, main, footer {
+    padding: 2px calc((100% - 800px) / 2) 0; 
+}
+
+main {
+    margin-top: 54px;
+    margin-bottom: 54px;
+    min-height: calc(100vh - 345px);
+    overflow: auto;
+}
+
+h1 {
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 36px;
+    position: relative;
+    top: -9px;
+}
+
+a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--text-hover);
+    text-decoration: underline;
+}
+
+nav {
+    border-bottom: 1px solid var(--border);
+    padding-top: 17px;
+    padding-bottom: 15px;
+    background: var(--bg-secondary);
+    height: 60px;
+}
+
+nav a {
+    margin-right: 1.5em;
+    display: inline-block;
+    font-size: 1.8rem;
+}
+
+nav form {
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+nav div {
+    width: 50%;
+    float: left;
+}
+
+nav div:last-child {
+    text-align: right;
+}
+
+nav div:last-child a {
+    margin-left: 1.5em;
+    margin-right: 0;
+}
+
+nav a.live {
+    color: var(--text-primary);
+    cursor: default;
+}
+
+nav a.live:hover {
+    text-decoration: none;
+}
+
+nav a.live:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: calc(50% - 7px);
+    top: 9px;
+    width: 14px;
+    height: 14px;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(-45deg);
+}

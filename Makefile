@@ -26,4 +26,7 @@ run:
 	go run ./cmd/web/
 	
 test:
-	go test ./... -coverprofile=coverage.out
+	mkdir -p coverage && go test ./... -coverprofile=./coverage/coverage.out
+	
+report:
+	mkdir -p report && go tool cover -html=./coverage/coverage.out -o ./report/coverage.html

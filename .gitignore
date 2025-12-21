@@ -31,4 +31,6 @@
 api
 
 MILESTONE.md
-coverage.out
+coverage/
+build/
+report/

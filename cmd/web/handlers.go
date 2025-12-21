@@ -9,7 +9,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) stocksView(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("This is a stock view."))
+	app.render(w, r, http.StatusOK, "stock.gohtml", templateData{})
 }
 
 func (app *application) stockCreate(w http.ResponseWriter, r *http.Request) {

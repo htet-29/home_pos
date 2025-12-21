@@ -1,0 +1,77 @@
+.register-card {
+    background: var(--bg-secondary);
+    width: 100%;
+    padding: 4rem;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+}
+
+p.subtitle {
+    /* color: var(--text-muted); */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1.6rem;
+    transition: border-color 0.2s box-shadow 0.2s;
+    background-color: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.btn-submit {
+    margin-top: 1.6rem;
+    background-color: var(--text-secondary);
+    color: white;
+    padding: 1.4rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-submit:hover {
+    background-color: var(--text-hover);
+}

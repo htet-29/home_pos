@@ -1,9 +1,15 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/htet-29/home-pos/ui"
+)
 
 func (app *application) routes() *http.ServeMux {
 	mux := http.NewServeMux()
+
+	mux.Handle("GET /static/", http.FileServerFS(ui.Files))
 
 	mux.HandleFunc("GET /{$}", app.home)
 	mux.HandleFunc("GET /pos/stock", app.stocksView)

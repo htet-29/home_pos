@@ -1,7 +1,8 @@
-package main_test
+package main
 
 import (
 	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -37,5 +38,29 @@ func TestNavigateAllRoutesReturnOKStatus(t *testing.T) {
 				t.Errorf("expected status ok, got %d instead.\n", resp.StatusCode)
 			}
 		})
+	}
+}
+
+func TestHomeRoute(t *testing.T) {
+	templateCache, err := newTemplateCache()
+	if err != nil {
+		t.Fatalf("Cannot create template cache: %v", err)
+	}
+
+	app := &application{
+		templateCache: templateCache,
+	}
+
+	ts := httptest.NewServer(app.routes())
+	defer ts.Close()
+
+	path := ts.URL + "/"
+	rs, err := ts.Client().Get(path)
+	if err != nil {
+		t.Errorf("%v not found. %v", path, err)
+	}
+
+	if rs.StatusCode != http.StatusOK {
+		t.Errorf("expected %d but got %d instead.", http.StatusOK, rs.StatusCode)
 	}
 }
